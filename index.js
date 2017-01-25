@@ -6,7 +6,10 @@ var io = require('socket.io')(http);
 var fs = require('fs');
 var creds = '';
 var redis = require('redis');
+<<<<<<< HEAD
 var logger = require('morgan');
+=======
+>>>>>>> 1d7b6f6a1c0aa5ab593dd8c7b4f2f24268ffd6e0
 var client = '';
 var port = process.env.PORT || 3000;
 
@@ -20,7 +23,10 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+<<<<<<< HEAD
 app.use(logger('dev'));
+=======
+>>>>>>> 1d7b6f6a1c0aa5ab593dd8c7b4f2f24268ffd6e0
 // Start the Server
 http.listen(port, function() {
     console.log('Server Started. Listening on *:' + port);
