@@ -64,6 +64,13 @@ app.get('/', function (req, res) {
         root: __dirname
     });
 });
+
+app.get('/loggedin', function(req, res) {
+  console.log(req.body)
+  console.log(req.query)
+  console.log(req.params)
+  res.status(200).send("You are logged in")
+})
 // API - Join Chat
 app.post('/join', function(req, res) {
     var username = req.body.username;

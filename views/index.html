@@ -5,7 +5,7 @@
     <head>
 
       <meta charset="UTF-8">
-
+<meta name="google-signin-client_id" content="875764090778-3q2016ivo8255vdusoco09k2s0iju8b0.apps.googleusercontent.com">
       <title>Node.js + Socket.io + Redis Chat | ScaleGrid</title>
 
       <link rel="stylesheet" href="css/main.css">
@@ -18,6 +18,8 @@
 
             <h1>Node.js + Socket.io + Redis Chat | ScaleGrid</h1>
 
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
             <div class="join-chat">
 
                 <label for="username">Username:</label>
@@ -27,7 +29,7 @@
                 <input type="button" id="join-chat" value="Join Chat" />
 
             </div><br />
-
+            <a href="#" onclick="signOut();">Sign out</a>   
             <div class="chat-info"></div><br />
 
             <div class="chat">
@@ -49,6 +51,24 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
         <script src="js/main.js"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <script type="text/javascript">
+        function onSignIn(googleUser) {
+          var profile = googleUser.getBasicProfile();
+          console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+          console.log('Name: ' + profile.getName());
+          console.log('Image URL: ' + profile.getImageUrl());
+          console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+          document.getElementById('username').value = profile.getEmail()
+        }
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+              console.log('User signed out.');
+            });
+          }
+    </script>
 
     </body>
 
