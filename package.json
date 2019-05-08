@@ -1,0 +1,27 @@
+{
+  "name": "chat-book",
+  "version": "1.0.0",
+  "description": "Simple Chat Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krunal704/chat-book.git"
+  },
+  "keywords": [
+    "socket.io"
+  ],
+  "author": "Krunal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krunal704/chat-book/issues"
+  },
+  "homepage": "https://github.com/krunal704/chat-book#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "redis": "^2.8.0",
+    "socket.io": "^2.2.0"
+  }
+}
