@@ -6,6 +6,7 @@ var io = require('socket.io')(http);
 var fs = require('fs');
 var creds = '';
 var redis = require('redis');
+var logger = require('morgan');
 var client = '';
 var port = process.env.PORT || 3000;
 
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+app.use(logger('dev'));
 // Start the Server
 http.listen(port, function() {
     console.log('Server Started. Listening on *:' + port);
@@ -62,6 +64,13 @@ app.get('/', function (req, res) {
         root: __dirname
     });
 });
+
+app.get('/loggedin', function(req, res) {
+  console.log(req.body)
+  console.log(req.query)
+  console.log(req.params)
+  res.status(200).send("You are logged in")
+})
 // API - Join Chat
 app.post('/join', function(req, res) {
     var username = req.body.username;
