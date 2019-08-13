@@ -1,4 +1,6 @@
 node_modules
 .vscode
+npm-debug.log
+package-lock.json
 creds_env.sh
 creds.json
