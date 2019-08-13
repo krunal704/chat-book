@@ -4,7 +4,6 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var fs = require('fs');
-var creds = '';
 var redis = require('redis');
 var logger = require('morgan');
 var client = '';
@@ -33,28 +32,30 @@ var chatters = [];
 
 var chat_messages = [];
 // Read credentials from JSON
+const creds = {}
+creds["user"] = process.env.CT704_USER
+creds["password"] = process.env.CT704_PASSWORD
+creds["host"] = process.env.CT704_HOST
+creds["port"] = process.env.CT704_PORT
+console.log("Read from env", creds)
 
-fs.readFile('creds.json', 'utf-8', function(err, data) {
-    if(err) throw err;
-    creds = JSON.parse(data);
-    client = redis.createClient('redis://' + creds.user + ':' + creds.password + '@' + creds.host + ':' + creds.port + '/0');
-    // Redis Client Ready
-    client.once('ready', function() {
-        // Flush Redis DB
-        // client.flushdb();
-        // Initialize Chatters
-        client.get('chat_users', function(err, reply) {
-            if (reply) {
-                chatters = JSON.parse(reply);
-            }
-        });
-        // Initialize Messages
-        client.get('chat_app_messages', function(err, reply) {
-            if (reply) {
+client = redis.createClient('redis://' + creds.user + ':' + creds.password + '@' + creds.host + ':' + creds.port + '/0');
+// Redis Client Ready
+client.once('ready', function() {
+    // Flush Redis DB
+    // client.flushdb();
+    // Initialize Chatters
+    client.get('chat_users', function(err, reply) {
+        if (reply) {
+            chatters = JSON.parse(reply);
+        }
+    });
+    // Initialize Messages
+    client.get('chat_app_messages', function(err, reply) {
+        if (reply) {
 
-               chat_messages = JSON.parse(reply);
-            }
-        });
+            chat_messages = JSON.parse(reply);
+        }
     });
 });
 

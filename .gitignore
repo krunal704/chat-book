@@ -1,4 +1,4 @@
 node_modules
 .vscode
-
-creds_.json
+creds_env.sh
+creds.json
